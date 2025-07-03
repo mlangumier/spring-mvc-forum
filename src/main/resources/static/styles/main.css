@@ -1,0 +1,31 @@
+*, html, body {
+}
+
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+}
+
+section {
+    margin: 4rem;
+}
+
+form {
+    width: 20rem;
+    margin: auto;
+    place-items: center;
+
+    fieldset {
+        border: none;
+    }
+}
+
+.error {
+    color: red;
+    padding: 0;
+}

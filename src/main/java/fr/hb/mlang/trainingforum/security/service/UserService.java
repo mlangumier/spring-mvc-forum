@@ -1,4 +1,4 @@
-package fr.hb.mlang.trainingforum.service;
+package fr.hb.mlang.trainingforum.security.service;
 
 import fr.hb.mlang.trainingforum.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

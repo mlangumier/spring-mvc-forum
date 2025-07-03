@@ -38,13 +38,13 @@ Implement this class diagram and its functionalities, including authentication a
 
 ## Registering process
 
-- [ ] Set up DTOs and validation annotations for the user:
+- [x] Set up DTOs and validation annotations for the user:
     - Register form: username, password, confirmPassword
     - Login form: username, password
-- [ ] Set up an `AuthController`:
+- [x] Set up an `AuthController`:
     - Process register form: verify data, hash password, set default role & persist
     - (Optional) Create tests
-- [ ] Create a register template page
+- [x] Create a register template page
 - [ ] (Optional) Create a login template page
 
 ## Manage posts

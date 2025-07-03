@@ -15,10 +15,12 @@ public class SecurityConfig {
     public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/").authenticated()
-                        .anyRequest().permitAll()
+//                        .requestMatchers("/")
+//                        .authenticated()
+                        .anyRequest()
+                        .permitAll()
                 )
-                .httpBasic(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
 //                .formLogin(formConfig -> formConfig.loginPage("/login"));
 
