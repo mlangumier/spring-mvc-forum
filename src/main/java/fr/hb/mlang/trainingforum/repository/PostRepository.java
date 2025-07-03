@@ -4,6 +4,20 @@ import fr.hb.mlang.trainingforum.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import fr.hb.mlang.trainingforum.entity.User;
+
+import java.util.Set;
+
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
+
+    /**
+     * Finds all the {@link Post} entries that were written by a {@link User}.
+     *
+     * @param author The <code>user</code> whose <code>post</code> entries we want to retrieve
+     * @return A collection of <code>post</code> entries that were written by a given <code>user</code>,
+     * or an empty array.
+     */
+    Set<Post> findByAuthor(User author);
+
 }

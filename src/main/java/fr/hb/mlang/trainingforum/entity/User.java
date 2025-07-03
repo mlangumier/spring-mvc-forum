@@ -2,14 +2,14 @@ package fr.hb.mlang.trainingforum.entity;
 
 import fr.hb.mlang.trainingforum.enums.Role;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user_table")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -84,6 +84,11 @@ public class User {
         this.role = role;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
     public Set<Post> getPosts() {
         return posts;
     }
@@ -91,14 +96,6 @@ public class User {
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
-
-//    public Set<Reaction> getReactions() {
-//        return reactions;
-//    }
-
-//    public void setReactions(Set<Reaction> reactions) {
-//        this.reactions = reactions;
-//    }
 
     /**
      * Adds a {@link Post} to this user's list of posts.

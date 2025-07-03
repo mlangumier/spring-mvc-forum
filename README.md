@@ -1,5 +1,7 @@
 # Forum posts - Spring Boot MVC demo app
 
+Base project: [Spring Blog](https://gitlab.com/jeandemel-formations/hb-cda-2025/springblog)
+
 ## Objectives
 
 Implement this class diagram and its functionalities, including authentication and role-specific features.  
@@ -21,14 +23,14 @@ Implement this class diagram and its functionalities, including authentication a
 ### Entities
 
 - [x] Create the entities with JPA annotations, including their relations. Specifications:
-    - Ex relation: Post.author (User)
+    - Ex relation: `Post` has `author` (User)
     - Use UUIDs (string) as entity identifier
 - [x] Set up repositories for all three entities
 
 ### Authentication
 
-- [ ] Implement `UserDetails` on our `User` entity
-- [ ] Set up some "custom" methods:
+- [x] Implement `UserDetails` on our `User` entity
+- [x] Set up some "custom" methods:
     - `findByUsername` (UserRepository)
     - `findByAuthor` (PostRepository)
 - [ ] Create a `UserService` class that implements `UserDetailsService`
