@@ -23,15 +23,34 @@ Implement this class diagram and its functionalities, including authentication a
 ### Entities
 
 - [x] Create the entities with JPA annotations, including their relations. Specifications:
-    - Ex relation: `Post` has `author` (User)
+    - Ex relation: `Post ` has `author` (User)
     - Use UUIDs (string) as entity identifier
 - [x] Set up repositories for all three entities
 
-### Authentication
+### Authentication Config
 
 - [x] Implement `UserDetails` on our `User` entity
 - [x] Set up some "custom" methods:
     - `findByUsername` (UserRepository)
     - `findByAuthor` (PostRepository)
-- [ ] Create a `UserService` class that implements `UserDetailsService`
-- [ ] Set up a `SecurityConfig` file to allows access to "/" route for now
+- [x] Set up a `SecurityConfig` file to allows access to "/" route for now
+- [x] Create a `UserService` class that implements `UserDetailsService`
+
+## Registering process
+
+- [ ] Set up DTOs and validation annotations for the user:
+    - Register form: username, password, confirmPassword
+    - Login form: username, password
+- [ ] Set up an `AuthController`:
+    - Process register form: verify data, hash password, set default role & persist
+    - (Optional) Create tests
+- [ ] Create a register template page
+- [ ] (Optional) Create a login template page
+
+## Manage posts
+
+- [ ] Set up DTOs for Posts:
+    - Write a new post: title, content
+- [ ] Set up a `PostController`:
+    - Process writing a new post: assign authenticated user, set date & persist
+- [ ] Update SecurityConfig to also manage post routes (only accessible if authenticated)
