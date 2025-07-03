@@ -3,6 +3,7 @@ package fr.hb.mlang.trainingforum.security.controller;
 import fr.hb.mlang.trainingforum.entity.User;
 import fr.hb.mlang.trainingforum.enums.Role;
 import fr.hb.mlang.trainingforum.repository.UserRepository;
+import fr.hb.mlang.trainingforum.security.dto.UserLoginDTO;
 import fr.hb.mlang.trainingforum.security.dto.UserRegisterDTO;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,30 +14,29 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/register")
-public class RegisterController {
+public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping
-    public String displayRegister(Model model) {
+
+    @GetMapping("/register")
+    public String displayRegisterForm(Model model) {
         model.addAttribute("user", new UserRegisterDTO());
 
-        return "register";
+        return "register-form";
     }
 
-    @PostMapping
-    public String processRegister(@ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, Model model) {
+    @PostMapping("/register")
+    public String processRegisterForm(@ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, Model model) {
 
         // Check password & confirmPassword have the same value
         if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
@@ -53,11 +53,10 @@ public class RegisterController {
 
         // If errors, back to register form & display errors (keep username if it doesn't exist yet, but password error)
         if (bindingResult.hasErrors()) {
-//            model.addAttribute("user", new UserRegisterDTO(userRegisterDTO.getUsername(), null, null));
-            return "register";
+            return "register-form";
         }
 
-        // Otherwise, hash password, set default role & persist new user
+        // Otherwise, create new User, hash password & set default role
         String hashedPassword = passwordEncoder.encode(userRegisterDTO.getPassword());
 
         User user = new User();
@@ -69,5 +68,12 @@ public class RegisterController {
         userRepository.save(user);
 
         return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String displayLoginForm(Model model) {
+        model.addAttribute("user", new UserLoginDTO());
+
+        return "login-form";
     }
 }

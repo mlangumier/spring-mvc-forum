@@ -2,7 +2,6 @@ package fr.hb.mlang.trainingforum.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,32 +12,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
-        http
+        return http
                 .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/")
-//                        .authenticated()
-                        .anyRequest()
-                        .permitAll()
+                        .requestMatchers("/post/new").authenticated()
+                        .anyRequest().permitAll()
                 )
-//                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults());
-//                .formLogin(formConfig -> formConfig.loginPage("/login"));
-
-        return http.build();
+                .formLogin(formLogin -> formLogin.loginPage("/login"))
+                .build();
     }
-
-    //INFO: following Spring Security's basic setup (might not be complete)
-//    @Bean
-//    public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((authorize) -> authorize
-//                        .anyRequest().authenticated()
-//                )
-//                .httpBasic(Customizer.withDefaults())
-//                .formLogin(Customizer.withDefaults());
-//
-//        return http.build();
-//    }
 
     @Bean
     PasswordEncoder passwordEncoder() {

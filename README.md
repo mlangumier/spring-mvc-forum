@@ -1,6 +1,6 @@
 # Forum posts - Spring Boot MVC demo app
 
-Base project: [Spring Blog](https://gitlab.com/jeandemel-formations/hb-cda-2025/springblog)
+Demo project: [Spring Blog](https://gitlab.com/jeandemel-formations/hb-cda-2025/springblog)
 
 ## Objectives
 
@@ -36,7 +36,7 @@ Implement this class diagram and its functionalities, including authentication a
 - [x] Set up a `SecurityConfig` file to allows access to "/" route for now
 - [x] Create a `UserService` class that implements `UserDetailsService`
 
-## Registering process
+### Registering process
 
 - [x] Set up DTOs and validation annotations for the user:
     - Register form: username, password, confirmPassword
@@ -45,12 +45,19 @@ Implement this class diagram and its functionalities, including authentication a
     - Process register form: verify data, hash password, set default role & persist
     - (Optional) Create tests
 - [x] Create a register template page
-- [ ] (Optional) Create a login template page
+- [x] (Optional) Create a login template page
 
-## Manage posts
+### Add posts
 
-- [ ] Set up DTOs for Posts:
+- [x] Set up DTOs for Posts:
     - Write a new post: title, content
-- [ ] Set up a `PostController`:
+- [x] Set up a `PostController`:
     - Process writing a new post: assign authenticated user, set date & persist
-- [ ] Update SecurityConfig to also manage post routes (only accessible if authenticated)
+- [x] Update SecurityConfig to also manage post routes (only accessible if authenticated)
+
+### Display posts
+
+- [ ] Add a displayPosts method in `PostController`
+    - Set up pagination with `PageRequest.of(params)`: start with first page, display 5 posts per page, sort by date
+- [ ] Set up Thymeleaf template to display the paginated results
+    - Display pagination links control
