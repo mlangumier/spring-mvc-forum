@@ -20,15 +20,16 @@ Implement this class diagram and its functionalities, including authentication a
 
 ### Entities
 
-- [ ] Create the entities with JPA annotations, including their relations. Specifications:
-  - Ex relation: Post.author (User)
-  - Use UUIDs (string) as entity identifier
-- [ ] Set up repositories for all three entities, including some "custom" methods: 
-  - `findByUsername` (UserRepository)
-  - `findByAuthor` (PostRepository)
+- [x] Create the entities with JPA annotations, including their relations. Specifications:
+    - Ex relation: Post.author (User)
+    - Use UUIDs (string) as entity identifier
+- [x] Set up repositories for all three entities
 
 ### Authentication
 
-- [ ] Implement `UserDetails` on our `User` entity 
+- [ ] Implement `UserDetails` on our `User` entity
+- [ ] Set up some "custom" methods:
+    - `findByUsername` (UserRepository)
+    - `findByAuthor` (PostRepository)
 - [ ] Create a `UserService` class that implements `UserDetailsService`
 - [ ] Set up a `SecurityConfig` file to allows access to "/" route for now
