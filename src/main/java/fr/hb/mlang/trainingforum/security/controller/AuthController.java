@@ -19,61 +19,63 @@ import java.util.Optional;
 
 @Controller
 public class AuthController {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+
+  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
+  }
+
+
+  @GetMapping("/register")
+  public String displayRegisterForm(Model model) {
+    model.addAttribute("user", new UserRegisterDTO());
+
+    return "register-form";
+  }
+
+  @PostMapping("/register")
+  public String processRegisterForm(@ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO,
+      BindingResult bindingResult, Model model) {
+
+    // Check password & confirmPassword have the same value
+    if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+      bindingResult.addError(new FieldError("user", "password", "Passwords don't match"));
+      bindingResult.addError(new FieldError("user", "confirmPassword", "Passwords don't match"));
     }
 
-
-    @GetMapping("/register")
-    public String displayRegisterForm(Model model) {
-        model.addAttribute("user", new UserRegisterDTO());
-
-        return "register-form";
+    // Check if username is available
+    Optional<User> foundUser = userRepository.findByUsername(userRegisterDTO.getUsername());
+    if (foundUser.isPresent()) {
+      userRegisterDTO.setUsername(null);
+      bindingResult.addError(new FieldError("user", "username", "Username already exists"));
     }
 
-    @PostMapping("/register")
-    public String processRegisterForm(@ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, Model model) {
-
-        // Check password & confirmPassword have the same value
-        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
-            bindingResult.addError(new FieldError("user", "password", "Passwords don't match"));
-            bindingResult.addError(new FieldError("user", "confirmPassword", "Passwords don't match"));
-        }
-
-        // Check if username is available
-        Optional<User> foundUser = userRepository.findByUsername(userRegisterDTO.getUsername());
-        if (foundUser.isPresent()) {
-            userRegisterDTO.setUsername(null);
-            bindingResult.addError(new FieldError("user", "username", "Username already exists"));
-        }
-
-        // If errors, back to register form & display errors (keep username if it doesn't exist yet, but password error)
-        if (bindingResult.hasErrors()) {
-            return "register-form";
-        }
-
-        // Otherwise, create new User, hash password & set default role
-        String hashedPassword = passwordEncoder.encode(userRegisterDTO.getPassword());
-
-        User user = new User();
-        user.setUsername(userRegisterDTO.getUsername());
-        user.setPassword(hashedPassword);
-        user.setRole(Role.USER);
-
-        // Persist user
-        userRepository.save(user);
-
-        return "redirect:/login";
+    // If errors, back to register form & display errors (keep username if it doesn't exist yet, but password error)
+    if (bindingResult.hasErrors()) {
+      return "register-form";
     }
 
-    @GetMapping("/login")
-    public String displayLoginForm(Model model) {
-        model.addAttribute("user", new UserLoginDTO());
+    // Otherwise, create new User, hash password & set default role
+    String hashedPassword = passwordEncoder.encode(userRegisterDTO.getPassword());
 
-        return "login-form";
-    }
+    User user = new User();
+    user.setUsername(userRegisterDTO.getUsername());
+    user.setPassword(hashedPassword);
+    user.setRole(Role.USER);
+
+    // Persist user
+    userRepository.save(user);
+
+    return "redirect:/login";
+  }
+
+  @GetMapping("/login")
+  public String displayLoginForm(Model model) {
+    model.addAttribute("user", new UserLoginDTO());
+
+    return "login-form";
+  }
 }

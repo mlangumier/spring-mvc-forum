@@ -10,13 +10,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/posts/new").authenticated().anyRequest().permitAll()).formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/posts", true)).build();
-    }
+  @Bean
+  public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
+    return http.authorizeHttpRequests(
+            authorize -> authorize.requestMatchers("/posts/new").authenticated().anyRequest()
+                .permitAll())
+        .formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/posts", true))
+        .build();
+  }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 }

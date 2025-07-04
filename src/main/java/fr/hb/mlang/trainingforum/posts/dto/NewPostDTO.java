@@ -5,44 +5,44 @@ import jakarta.validation.constraints.Size;
 
 public class NewPostDTO {
 
-    @NotBlank(message = "Use a title to preface your post")
-    @Size(min = 5, message = "Your title is too short")
-    @Size(max = 255, message = "Your title is too long")
-    private String title;
+  @NotBlank(message = "Use a title to preface your post")
+  @Size(min = 5, message = "Your title is too short")
+  @Size(max = 255, message = "Your title is too long")
+  private String title;
 
-    @NotBlank(message = "Your post must have some content in order to be submitted")
-    private String content;
+  @NotBlank(message = "Your post must have some content in order to be submitted")
+  private String content;
 
-    /**
-     * Empty constructor to prepare the form
-     */
-    public NewPostDTO() {
-    }
+  /**
+   * Empty constructor to prepare the form
+   */
+  public NewPostDTO() {
+  }
 
-    /**
-     * Full constructor with the form's data
-     *
-     * @param title   Title of the post written by the user
-     * @param content Content of the post written by the user
-     */
-    public NewPostDTO(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
+  /**
+   * Full constructor with the form's data
+   *
+   * @param title   Title of the post written by the user
+   * @param content Content of the post written by the user
+   */
+  public NewPostDTO(String title, String content) {
+    this.title = title;
+    this.content = content;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 }
