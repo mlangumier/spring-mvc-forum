@@ -16,18 +16,20 @@
     <fieldset>
       <label for="username">Username</label>
       <input type="text" id="username" name="username" th:field="*{username}"/>
-      <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></small>
     </fieldset>
 
     <fieldset>
       <label for="password">Password</label>
       <input type="password" id="password" name="password" th:field="*{password}"/>
-      <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></small>
     </fieldset>
+
+    <p th:if="${param.error}" class="error">Wrong credentials</p>
 
     <fieldset>
       <button type="submit">Log in</button>
     </fieldset>
+
+    <a href="/register" style="text-align: end">Create an account</a>
   </form>
 </section>
 </body>

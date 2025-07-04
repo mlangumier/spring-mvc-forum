@@ -57,7 +57,7 @@ Implement this class diagram and its functionalities, including authentication a
 
 ### Display posts
 
-- [ ] Add a displayPosts method in `PostController`
+- [x] Add a displayPosts method in `PostController`
     - Set up pagination with `PageRequest.of(params)`: start with first page, display 5 posts per page, sort by date
-- [ ] Set up Thymeleaf template to display the paginated results
+- [x] Set up Thymeleaf template to display the paginated results
     - Display pagination links control

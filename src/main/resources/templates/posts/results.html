@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts | Spring MVC Forum</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<section>
+    <h1>Posts</h1>
+</section>
+
+<section th:object="${paginatedPosts}" class="results">
+    <div id="actions" style="text-align: end">
+        <a href="posts/new" th:class="btn">Write a post</a>
+    </div>
+
+    <div>
+        <p>[[*{totalElements}]] total results</p>
+    </div>
+
+    <div th:each="post : ${paginatedPosts.content}" th:object="${post}" class="results-item">
+        <h3 class="title">[[*{title}]]</h3>
+        <p class="content">[[*{content}]]</p>
+        <p class="details">by [[*{author.username}]], at [[*{#temporals.format(postedAt, 'HH:mm, MM/dd/YYYY')}]]</p>
+        <!-- Display reactions -->
+    </div>
+
+    <div th:if="*{totalPages > 0}" class="pagination">
+        <a th:class="${paginatedPosts.isFirst} ? hidden" th:href="@{/posts(page=${currentPage - 1})}" th:text="Prev"/>
+        <a th:each="pageNbr: ${pageNumbers}" th:href="@{/posts(page=${pageNbr})}"
+           th:class="${pageNbr == currentPage} ? active" th:text="${pageNbr}"/>
+        <a th:class="${paginatedPosts.isLast()} ? hidden" th:href="@{/posts(page=${currentPage + 1})}" th:text="Next"/>
+    </div>
+</section>
+
+</body>
+</html>

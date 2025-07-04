@@ -12,13 +12,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain accessControl(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/post/new").authenticated()
-                        .anyRequest().permitAll()
-                )
-                .formLogin(formLogin -> formLogin.loginPage("/login"))
-                .build();
+        return http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/posts/new").authenticated().anyRequest().permitAll()).formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/posts", true)).build();
     }
 
     @Bean

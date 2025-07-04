@@ -1,6 +1,5 @@
 package fr.hb.mlang.trainingforum.posts.dto;
 
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -8,11 +7,10 @@ public class NewPostDTO {
 
     @NotBlank(message = "Use a title to preface your post")
     @Size(min = 5, message = "Your title is too short")
-    @Size(max = 128, message = "Your title is too long")
+    @Size(max = 255, message = "Your title is too long")
     private String title;
 
     @NotBlank(message = "Your post must have some content in order to be submitted")
-    @Lob
     private String content;
 
     /**

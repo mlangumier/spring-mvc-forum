@@ -14,12 +14,12 @@
 <section>
     <form th:action="@{/register}" th:object="${user}" method="post">
         <fieldset>
-            <label for="username">Choose your username</label>
+            <label for="username">Username</label>
             <input type="text" id="username" name="username" th:field="*{username}"/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></small>
         </fieldset>
         <fieldset>
-            <label for="password">Enter your password</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" th:field="*{password}"/>
             <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></small>
         </fieldset>
@@ -32,6 +32,8 @@
         <fieldset>
             <button type="submit">Register</button>
         </fieldset>
+
+        <a href="/login" style="text-align: end">Already have an account? Log in</a>
     </form>
 </section>
 </body>
