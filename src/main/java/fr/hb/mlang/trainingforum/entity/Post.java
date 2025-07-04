@@ -47,8 +47,14 @@ public class Post {
    * @param author
    * @param reactions
    */
-  public Post(String id, String title, String content, LocalDateTime postedAt, User author,
-      Set<Reaction> reactions) {
+  public Post(
+      String id,
+      String title,
+      String content,
+      LocalDateTime postedAt,
+      User author,
+      Set<Reaction> reactions
+  ) {
     this.id = id;
     this.title = title;
     this.content = content;
@@ -126,9 +132,7 @@ public class Post {
 
   @Override
   public boolean equals(Object o) {
-      if (!(o instanceof Post post)) {
-          return false;
-      }
+    if (!(o instanceof Post post)) return false;
     return Objects.equals(getId(), post.getId());
   }
 

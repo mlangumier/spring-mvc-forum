@@ -7,9 +7,14 @@ body {
     font-family: "Trebuchet MS", sans-serif;
 }
 
+
 h1 {
     text-align: center;
     text-transform: uppercase;
+}
+
+header {
+    padding: 1.5rem 2rem;
 }
 
 section {
@@ -67,7 +72,7 @@ button {
     }
 }
 
-form {
+.form {
     width: 20rem;
     margin: auto;
     padding: 4rem;

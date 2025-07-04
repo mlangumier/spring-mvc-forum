@@ -122,9 +122,7 @@ public class User implements UserDetails {
 
   @Override
   public boolean equals(Object o) {
-    if (!(o instanceof User user)) {
-      return false;
-    }
+    if (!(o instanceof User user)) return false;
     return Objects.equals(getId(), user.getId());
   }
 

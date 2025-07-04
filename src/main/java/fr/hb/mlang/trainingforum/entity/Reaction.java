@@ -78,9 +78,7 @@ public class Reaction {
 
   @Override
   public boolean equals(Object o) {
-    if (!(o instanceof Reaction reaction)) {
-      return false;
-    }
+    if (!(o instanceof Reaction reaction)) return false;
     return Objects.equals(getId(), reaction.getId());
   }
 

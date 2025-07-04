@@ -21,7 +21,6 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping("/posts")
 public class PostController {
-
   private final PostRepository postRepository;
 
   public PostController(PostRepository postRepository) {

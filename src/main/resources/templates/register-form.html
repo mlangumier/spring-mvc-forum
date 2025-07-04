@@ -12,7 +12,7 @@
 </section>
 
 <section>
-    <form th:action="@{/register}" th:object="${user}" method="post">
+    <form th:action="@{/register}" th:object="${user}" method="post" th:class="form">
         <fieldset>
             <label for="username">Username</label>
             <input type="text" id="username" name="username" th:field="*{username}"/>

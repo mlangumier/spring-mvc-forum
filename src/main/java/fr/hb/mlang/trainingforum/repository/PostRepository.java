@@ -16,8 +16,7 @@ public interface PostRepository extends JpaRepository<Post, String> {
    *
    * @param author   The <code>user</code> whose <code>post</code> entries we want to retrieve
    * @param pageable Manages pagination for our results
-   * @return A collection of <code>post</code> entries that were written by a given
-   * <code>user</code>,
+   * @return A collection of <code>post</code> entries that were written by a given <code>user</code>,
    * or an empty array.
    */
   Page<Post> findByAuthor(User author, Pageable pageable);

@@ -12,7 +12,7 @@
 </section>
 
 <section>
-  <form th:action="@{/posts/new}" th:object="${post}" method="post">
+  <form th:action="@{/posts/new}" th:object="${post}" method="post" th:class="form">
     <fieldset>
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" th:field="*{title}"/>

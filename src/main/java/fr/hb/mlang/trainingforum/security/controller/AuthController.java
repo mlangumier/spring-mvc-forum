@@ -19,7 +19,6 @@ import java.util.Optional;
 
 @Controller
 public class AuthController {
-
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
@@ -37,8 +36,11 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public String processRegisterForm(@ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO,
-      BindingResult bindingResult, Model model) {
+  public String processRegisterForm(
+      @ModelAttribute("user") @Valid UserRegisterDTO userRegisterDTO,
+      BindingResult bindingResult,
+      Model model
+  ) {
 
     // Check password & confirmPassword have the same value
     if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
