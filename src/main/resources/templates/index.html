@@ -3,7 +3,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Home | Spring MVC Forum</title>
+  <title>Posts | Spring MVC Forum</title>
   <link th:href="@{/styles/main.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -21,7 +21,8 @@
 
 <main>
   <section>
-    <h1>Posts</h1>
+    <h1 th:text="${selectedUser != null} ? ${selectedUser.getUsername()} + '\'s latest posts'">
+      Latest Posts</h1>
   </section>
 
   <section th:object="${paginatedPosts}" class="results">
@@ -47,8 +48,9 @@
     <div th:each="post : ${paginatedPosts.content}" th:object="${post}" class="results-item">
       <h3 class="title">[[*{title}]]</h3>
       <p class="content">[[*{content}]]</p>
-      <p class="details">by [[*{author.username}]], at [[*{#temporals.format(postedAt, 'HH:mm,
-        MM/dd/YYYY')}]]</p>
+      <p class="details">
+        <span th:if="${post.author != selectedUser}">by <a th:href="@{/author/{username}(username=${post.author.username})}">[[*{author.username}]]</a>, </span>
+        [[*{#temporals.format(postedAt, 'HH:mm, MM/dd/YYYY')}]]</p>
       <!-- Display reactions -->
     </div>
 
