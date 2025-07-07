@@ -61,3 +61,10 @@ Implement this class diagram and its functionalities, including authentication a
     - Set up pagination with `PageRequest.of(params)`: start with first page, display 5 posts per page, sort by date
 - [x] Set up Thymeleaf template to display the paginated results
     - Display pagination links control
+
+### Coming soon
+- [ ] Set up `404` template
+- [ ] Get posts written by a User (by ID or username) (re-use `results` template?)
+- [ ] User reacts to posts (can react once to each post & remove or modify their reaction)
+- [ ] Get post by ID & display reactions
+- [ ] Sort posts by number of reactions

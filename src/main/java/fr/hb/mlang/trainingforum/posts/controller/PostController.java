@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Controller
-@RequestMapping("/posts")
 public class PostController {
   private final PostRepository postRepository;
 
@@ -27,7 +26,7 @@ public class PostController {
     this.postRepository = postRepository;
   }
 
-  @GetMapping
+  @GetMapping("/")
   public String displayPosts(
       Model model,
       @RequestParam(name = "page", defaultValue = "1") int page,
@@ -49,24 +48,24 @@ public class PostController {
       model.addAttribute("pageNumbers", pageNumbers);
     }
 
-    return "posts/results";
+    return "index";
   }
 
-  @GetMapping("/new")
+  @GetMapping("/new-post")
   public String displayPostForm(Model model) {
     model.addAttribute("post", new NewPostDTO());
 
-    return "posts/new";
+    return "post-form";
   }
 
-  @PostMapping("/new")
+  @PostMapping("/new-post")
   public String processPostForm(
       @ModelAttribute("post") @Valid NewPostDTO postDTO,
       BindingResult bindingResult,
       @AuthenticationPrincipal User user
   ) {
     if (bindingResult.hasErrors()) {
-      return "posts/new";
+      return "post-form";
     }
 
     Post post = new Post();
@@ -77,6 +76,6 @@ public class PostController {
 
     postRepository.save(post);
 
-    return "redirect:/posts";
+    return "redirect:/";
   }
 }

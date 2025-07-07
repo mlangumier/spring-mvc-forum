@@ -30,8 +30,8 @@ public class User implements UserDetails {
   private Set<Post> posts = new HashSet<>();
 
   //INFO: We don't need to get the user's reactions, and the @ManyToOne is the generator of this relation.
-//    @OneToMany(mappedBy = "author")
-//    private Set<Reaction> reactions = new HashSet<>();
+  // @OneToMany(mappedBy = "author")
+  // private Set<Reaction> reactions = new HashSet<>();
 
   /**
    * Default constructor
